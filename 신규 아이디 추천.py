@@ -9,5 +9,3 @@ def solution(new_id):
     if answer[-1] == '.': answer = answer[:-1]    
     if len(answer) <= 2: answer = answer + answer[-1] * (3-len(answer)) 
     return answer
-
-solution(new_id[0])
