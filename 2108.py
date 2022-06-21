@@ -1,5 +1,4 @@
 import sys
-import statistics
 
 n = int(sys.stdin.readline())
 num = [int(sys.stdin.readline()) for i in range(n)]
@@ -15,11 +14,8 @@ for i in num:
         del dict[i]
         
 mode = sorted(dict)[0] if len(dict.keys()) == 1 else sorted(dict)[1]
-# if len(dict.keys()) == 1:
-#     mode = sorted(dict)[0]
-# else : mode = sorted(dict)[1]
 
-print(round(statistics.mean(num)))
+print(round(sum(num)/n))
 print(sorted(num)[int((n+1)/2-1)])
 print(mode)
 print(max(num) - min(num))
