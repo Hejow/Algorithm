@@ -7,4 +7,4 @@ prefix_sum = [sum(arr[:k])]
 for i in range(n-k):
     prefix_sum.append(prefix_sum[i] + arr[i+k] - arr[i])
     
-print(prefix_sum)
+print(max(prefix_sum))
