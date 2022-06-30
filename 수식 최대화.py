@@ -66,7 +66,7 @@ def solution(expression):
 
 # def solution(expression):
 #     answer = 0
-#     for priorities in permutations(['+', '-', '*'], 3):
+#     for priorities in itertools.permutations(['+', '-', '*'], 3):
 #         result = int(calc(priorities, 0 ,expression))
 #         answer = max(answer, abs(result))
         
