@@ -18,10 +18,10 @@ def solution(grid):
                     
                     if grid[x][y] == 'L':
                         idx = 'ULDR'.index(d)
-                        d = 'ULDR'[0] if idx == 3 else 'ULDR'[idx+1]
+                        d = 'ULDR'[(idx+1)%4]
                     elif grid[x][y] == 'R':
                         idx = 'URDL'.index(d)
-                        d = 'URDL'[0] if idx == 3 else 'URDL'[idx+1]
+                        d = 'URDL'[(idx+1)%4]
                         
                 if move > 0 : answer.append(move)
             

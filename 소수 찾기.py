@@ -1,3 +1,4 @@
+### 풀이 1번
 def solution(n):
     arr = set(range(2, n+1))
     
@@ -7,6 +8,7 @@ def solution(n):
     
     return len(arr)
 
+### 풀이 2번
 def solution(n):
     answer = 0
     arr = [True] * (n+1)
