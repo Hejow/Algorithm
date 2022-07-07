@@ -4,7 +4,7 @@ T = int(sys.stdin.readline())
 for _ in range(T):
     N = int(sys.stdin.readline())
     arr = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
-    arr.sort()
+    arr.sort()  
 
     cnt = 1
     max_ = arr[0][1]

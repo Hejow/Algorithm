@@ -1,24 +1,20 @@
-import sys, itertools
-input = sys.stdin.readline
+import sys
 
-N = int(input())
+N = int(sys.stdin.readline())
 numbers = []
-tmp = []
+dict = {}
+
 for _ in range(N):
-    num = input().strip()
-    numbers.append(num)
-    for ch in num:
-        if ch not in tmp: tmp.append(ch)
-    
-max_ = 0
-for case in itertools.permutations(tmp, len(tmp)):
-    tmp_sum = 0
-    for num in numbers:
-        for t in tmp:
-            num.replace(t, str(case.index(t) + 1))
-        tmp_sum += int(num)
+    tmp = sys.stdin.readline().strip()
+    numbers.append(tmp)
+    for idx, x in enumerate(tmp):
+        dict[x] = dict.get(x, 0) + 10 ** (len(tmp) - idx - 1)
         
-    max_ = max(max_, tmp_sum)
+dict_values = list(dict.values())
+dict_values.sort(reverse=True)
+
+answer = 0
+for i, x in enumerate(dict_values):
+    answer += x * (9-i)
     
-print(max_)
-    
+print(answer)
