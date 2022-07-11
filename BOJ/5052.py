@@ -4,9 +4,9 @@ input = sys.stdin.readline
 def check(nums):
     for i in range(len(nums)-1):
         if nums[i] == nums[i+1][:len(nums[i])]:
-            print('no')
+            print('NO')
             return
-    print('yes')
+    print('YES')
 
 t = int(input())
 for _ in range(t):
