@@ -25,10 +25,8 @@ arr = list(map(int, sys.stdin.readline().split()))
 t = int(sys.stdin.readline())
 d = {}
 
-# 그래프화
 for i, v in enumerate(arr):
     if i not in d: d[i] = []
     d[v] = d.get(v, []) + [i]
     
 DFS(t)
-    
