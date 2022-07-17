@@ -72,9 +72,7 @@ def move(board, m):
 def backtracking(board, cnt):
     global max_
     if cnt == 5:
-        for i in range(n):
-            for j in range(n):
-                max_ = max(max_, board[i][j])
+        max_ = max(max_, max(map(max, board)))
         return
     
     for m in 'UDLR':
