@@ -1,30 +1,29 @@
 import sys
 
 input = sys.stdin.readline
-
 n = int(input())
 
-max_dp = [0] * 3
-min_dp = [0] * 3
+DP_max = [0] * 3
+DP_min = [0] * 3
 
-max_tmp = [0] * 3
-min_tmp = [0] * 3
+max_ = [0] * 3
+min_ = [0] * 3
 
-for i in range(n):
+for x in range(n):
     a, b, c = map(int, input().split())
-    for j in range(3):
-        if j == 0:
-            max_tmp[j] = a + max(max_dp[j], max_dp[j + 1])
-            min_tmp[j] = a + min(min_dp[j], min_dp[j + 1])
-        elif j == 1:
-            max_tmp[j] = b + max(max_dp[j - 1], max_dp[j], max_dp[j + 1])
-            min_tmp[j] = b + min(min_dp[j - 1], min_dp[j], min_dp[j + 1])
-        else:
-            max_tmp[j] = c + max(max_dp[j], max_dp[j - 1])
-            min_tmp[j] = c + min(min_dp[j], min_dp[j - 1])
+    for y in range(3):
+        if y == 0:
+            max_[y] = a + max(DP_max[y], DP_max[y + 1])
+            min_[y] = a + min(DP_min[y], DP_min[y + 1])
+        if y == 1:
+            max_[y] = b + max(DP_max[y - 1], DP_max[y], DP_max[y + 1])
+            min_[y] = b + min(DP_min[y - 1], DP_min[y], DP_min[y + 1])
+        if y == 2:
+            max_[y] = c + max(DP_max[y], DP_max[y - 1])
+            min_[y] = c + min(DP_min[y], DP_min[y - 1])
 
-    for j in range(3):
-        max_dp[j] = max_tmp[j]
-        min_dp[j] = min_tmp[j]
+    for y in range(3):
+        DP_max[y] = max_[y]
+        DP_min[y] = min_[y]
 
-print(max(max_dp), min(min_dp))
+print(max(DP_max), min(DP_min))
