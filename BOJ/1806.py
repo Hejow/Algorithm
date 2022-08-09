@@ -5,13 +5,14 @@ start, end = 0, 0
 sum_ = arr[0]
 ans = 100001
 
-while end < N:
+while True:
     if sum_ < S:
         end += 1
+        if end == N: break
         sum_ += arr[end]
     else:
-        if sum_ == S: ans = min(ans, end - start + 1)
         sum_ -= arr[start]
+        ans = min(ans, end - start + 1)
         start += 1
         
 print(ans if ans != 100001 else 0)
