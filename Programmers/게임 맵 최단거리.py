@@ -11,15 +11,15 @@ def solution(maps):
     queue.append([0, 0])
     
     while queue:
-        y, x = queue.pop(0)
+        x, y = queue.pop(0)
         
         for i in range(4):
             nx = x + moves[i][0]
             ny = y + moves[i][1]
             
-            if 0 <= nx < column and 0 <= ny < row and maps[ny][nx] == 1:
-                if graph[ny][nx] == -1:
-                    graph[ny][nx] = graph[y][x] + 1
-                    queue.append([ny, nx])
+            if 0 <= nx < row and 0 <= ny < column and maps[nx][ny] == 1:
+                if graph[nx][ny] == -1:
+                    graph[nx][ny] = graph[x][y] + 1
+                    queue.append([nx, ny])
                 
     return graph[-1][-1]
