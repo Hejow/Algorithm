@@ -11,7 +11,6 @@ total = 0
 for i in range(n):
     total += arr[i]
     r = total % m
-    # 나머지 값에 따라서 idx 정보 저장
     remainder[r] += 1
 
 for i in remainder:
