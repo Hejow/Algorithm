@@ -1,40 +1,41 @@
-import sys, heapq
+import sys
 input = sys.stdin.readline
+sys.setrecursionlimit(10**6)
 
-INF = int(1e9)
+def dfs1(current, parent, subtree_size, dist_sum):
+    subtree_size[current] = 1
+    for i in range(len(graph[current])):
+        child = graph[current][i][0]
+        weight = graph[current][i][1]
+        
+        if child != parent:
+            dfs1(child, current, subtree_size, dist_sum)
+            subtree_size[current] += subtree_size[child]
+            dist_sum[current] += dist_sum[child] + weight * subtree_size[child]
+            
+    return subtree_size,dist_sum
 
-def dijkstra(graph, start, size):
-    distance = [INF] * (size+1)
-    distance[start] = 0
-    queue = []
-    
-    heapq.heappush(queue, [0, start])
-    
-    while queue:
-        currentCost, currentNode = heapq.heappop(queue)
+def dfs2(current, parent, subtree_size, dist_sum):
+    for i in range(len(graph[current])):
+        child = graph[current][i][0]
+        weight = graph[current][i][1]
         
-        if distance[currentNode] < currentCost: continue
-        
-        for nextCost, nextNode in graph[currentNode]:
-            newCost = nextCost + currentCost
-            if newCost < distance[nextNode]:
-                distance[nextNode] = newCost
-                heapq.heappush(queue, [newCost, nextNode])
-    
-    sum_ = 0
-    for cost in distance:
-        if cost == INF: continue
-        sum_ += cost
-        
-    return sum_
+        if child != parent:
+            dist_sum[child] = dist_sum[current] + weight * (n - subtree_size[child]) - weight * subtree_size[child]
+            dfs2(child, current, subtree_size, dist_sum)
+            
+    return dist_sum
 
 n = int(input())
 graph = [[] for _ in range(n+1)]
 
 for _ in range(n-1):
-    start, end, cost = map(int, input().split())
-    graph[start].append([cost, end])
-    graph[end].append([cost, start])
+    x,y,t = map(int,input().split())
+    graph[x].append((y,t))
+    graph[y].append((x,t))
     
-for i in range(1, n+1):
-    print(dijkstra(graph, i, n))
+subtree_size, dist_sum = dfs1(1, 1, [0]*(n+1), [0]*(n+1))
+dist_sum = dfs2(1, 1, subtree_size, dist_sum)
+
+for i in range(1,n+1):
+    print(dist_sum[i])
