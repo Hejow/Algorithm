@@ -1,23 +1,22 @@
-# import sys
-# input = sys.stdin.readline
+import sys ; input = sys.stdin.readline
 
-# n, m, q = map(int, input().split())
-# h = [list(map(int, input().split())) for _ in range(m)]
-# w = list(map(int, input().split()))
+n, m, q = map(int, input().split())
+h = [list(map(int, input().split())) for _ in range(m)]
+w = list(map(int, input().split()))
 
-# for _ in range(q):
-#     inputs = list(map(int, input().split()))
-#     sum_ = w[-1] # 편향값
-    
-#     for i in range(m):
-#         tmp = h[i][-1] # 편향값
+nh = [0] * n
+s = w[-1]
+
+for i in range(m):
+    s += h[i][-1] * w[i]
+    for j in range(1, h[i][0]+1):
+        nh[h[i][j] - 1] += h[i][j + h[i][0]] * w[i]
         
-#         for j in range(1, h[i][0] + 1):
-#             tmp += inputs[h[i][j] - 1] * h[i][j + h[i][0]]
-
-#         sum_ += tmp * w[i]
+for _ in range(q):
+    inputs = list(map(int, input().split()))
+    sum_ = s
     
-#     print(sum_)
-t = 1
-t += 1 * 2
-print(t)
+    for i in range(n):
+        sum_ += inputs[i] * nh[i]
+
+    print(sum_)
