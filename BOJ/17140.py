@@ -1,32 +1,37 @@
 import sys ; input = sys.stdin.readline
 from collections import Counter
 
-row, column = 3, 3
-
-def rFun(board):
-    for r in range(row):
+def rFun():
+    maxSize = 0
+    for r in range(len(board)):
         s = sorted(Counter(board[r]).most_common(), key=lambda x:(x[1], x[0]))
         tmp = []
-        for e in s:
-            tmp.extend(e)
-        
-        
-def cFun(board):
-    for j in range(column):
-        for i in range(row):
-            return 0
+        for num, cnt in s:
+            if num == 0: continue
+            tmp.append(num)
+            tmp.append(cnt)
+        board[r] = tmp
+        maxSize = max(maxSize, len(tmp))
     
-    return 0
+    for r in range(len(board)):
+        board[r] += [0 for _ in range(maxSize - len(board[r]))]
+        board[r] = board[r][:100]
+
+def cFun():
+    global board
+    board = list(zip(*board))
+    rFun()
+    board = list(zip(*board))
 
 r, c, k = map(int, input().split())
-board = [list(map(int, input().split())) for _ in range(row)]
+board = [list(map(int, input().split())) for _ in range(3)]
 
-for i in range(100):
-    if row >= column: rFun(board)
-    else: cFun(board)
-    
-    if board[r][c] == k:
-        print(i)
-        sys.exit()
-
-print(-1)
+for i in range(101):
+    try:
+        if board[r-1][c-1] == k:
+            print(i)
+            break
+    except: pass
+    if len(board) >= len(board[0]): rFun()
+    else: cFun()
+else: print(-1)
